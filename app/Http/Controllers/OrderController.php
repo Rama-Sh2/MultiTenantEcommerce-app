@@ -49,9 +49,17 @@ class OrderController extends Controller
      */
     public function index(OrderIndexRequest $request)
     {
-        $data = $request->afterValidation();
-        $orders = $this->orderService->all($data);
-        return $this->response(OrderResource::collection($orders));
+        try {
+            $data = $request->afterValidation();
+            $orders = $this->orderService->all($data);
+            return response()->json(['data' => OrderResource::collection($orders)], 200);
+    
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while fetching orders',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**

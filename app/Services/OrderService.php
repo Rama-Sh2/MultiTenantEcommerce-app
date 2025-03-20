@@ -17,8 +17,9 @@ class OrderService
 
     public function all($data = [], $paginated = true, $withes = [])
     {
+        $tenantId = request('tenant_id');
         $query = Order::withTrashed()
-        ->where('tenant_id', $this->tenantId) 
+        ->where('tenant_id', $tenantId)         
         ->when(isset($data['search']), function ($query) use ($data) {
             return $query->where('name', 'like', "%{$data['search']}%")
                 ->orWhere('description', 'like', "%{$data['search']}%");

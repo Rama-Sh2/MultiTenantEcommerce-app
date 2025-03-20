@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,7 @@ class OrderFactory extends Factory
             'total' => $this->faker->randomFloat(2, 10, 1000),
             'discount' => $this->faker->randomFloat(2, 0, 100),
             'grand_total' => $this->faker->randomFloat(2, 10, 1000),
-            'tenant_id' => request()->tenant_id,
+            'tenant_id' => Tenant::factory(),
         ];
     }
 }

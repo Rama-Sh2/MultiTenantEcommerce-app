@@ -28,10 +28,11 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'user_id' => $this->user_id,
             'product_id' => $this->product_id,
             'quantity' => $this->quantity,
             'discount' => $this->discount ?? 0 ,
-            'total_price' => $this->total_price,
+            'total' => $this->total,
             'status' => $this->status ?? OrderStatusEnum::PENDING->value,
             'tenant' => TenantResource::make($this->whenLoaded('tenant')),
             'product' => ProductResource::make($this->whenLoaded('product')),

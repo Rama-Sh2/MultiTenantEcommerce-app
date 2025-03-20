@@ -35,7 +35,7 @@ class ProductTest extends TestCase
         $user = User::factory()->create();
         $tenant = Tenant::factory()->create();
 
-        $product = Product::factory()->create(['tenant_id' => $user->tenant_id]);
+        $product = Product::factory()->create(['tenant_id' => $tenant->id]);
 
         $this->actingAs($user);
 
@@ -53,7 +53,8 @@ class ProductTest extends TestCase
     public function test_delete_product()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->create(['tenant_id' => $user->tenant_id]);
+        $tenant = Tenant::factory()->create();
+        $product = Product::factory()->create(['tenant_id' => $tenant->id]);
 
         $this->actingAs($user);
 
@@ -66,7 +67,8 @@ class ProductTest extends TestCase
     public function test_get_all_products()
     {
         $user = User::factory()->create();
-        Product::factory()->count(5)->create(['tenant_id' => $user->tenant_id]);
+        $tenant = Tenant::factory()->create();
+        Product::factory()->count(5)->create(['tenant_id' => $tenant->id]);
 
         $this->actingAs($user);
 
@@ -79,7 +81,8 @@ class ProductTest extends TestCase
     public function test_get_single_product()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->create(['tenant_id' => $user->tenant_id]);
+        $tenant = Tenant::factory()->create();
+        $product = Product::factory()->create(['tenant_id' => $tenant->id]);
 
         $this->actingAs($user);
 

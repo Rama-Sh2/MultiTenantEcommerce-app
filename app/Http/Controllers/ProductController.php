@@ -93,8 +93,16 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = $this->productService->destroy($id);
-        return $this->response(['message' => 'Product deleted successfully']);
+        try {
+            $this->productService->destroy($id);
+            return response()->json(['message' => 'Product deleted successfully'], 200);
+    
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while deleting the product',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
 
     }
 }
